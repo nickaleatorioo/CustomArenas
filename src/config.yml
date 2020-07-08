@@ -1,0 +1,60 @@
+# Se o jogador pode usar quais quer teleporte na arena
+TeleporteNaArena: false
+# Se pode dropar itens na arena
+DroparItemNaArena: true
+# se as mensagens devem vir com prefix
+PrefixMessage: true
+# Se dropa os itens quando morre
+DroparItemAoMorrer: true
+# Se pode usar todos os comandos do jogo na arena
+UsarComandosNaArena: true
+# Tempo que fica imortal ao  entrar
+TempoImortal: 5
+# Cura da tijela de sopa
+CuraDaSopa: 6.0
+# Dano da bola de neve
+DanoBolaDeNeve: 6.0
+# Dano do ovo
+DanoOvo: 6.0
+# Lista de comandos permitidos caso seja proibido de usar comandos na arena
+ComandosPermitidos:
+  - "arena"
+  - "tell"
+
+Mensagens:
+  prefixo: "§8(§4§lDreamArenas§8) "
+  cmd_entrar: "§7/arena entrar <Arena> - Entra em uma arena."
+  cmd_sair: "§7/arena sair - Sai da arena atual."
+  cmd_lista: "§7/arena lista - Mostra todas as arenas disponíveis."
+  cmd_criar: "§7/arena criar <Arena> - Cria uma nova arena."
+  cmd_deletar: "§7/arena deletar <Arena> - Remove a arena."
+  cmd_setkit: "§7/arena setkit <Arena> - Atualiza o kit da arena."
+  cmd_setpot: "§7/arena setpot <Arena> - Atualiza as poções da arena."
+  cmd_setentrada: "§7/arena setentrada <Arena> - Atualiza a entrada da arena."
+  cmd_setsaida: "§7/arena setsair <Arena> - Atualiza a saída da arena."
+  cmd_setclan: "§7/arena setclan <Arena> <true/false> - Define se a arena tem limite de membros por clan"
+  cmd_setmembros: "§7/arena setmembros <Arena> <Tamanho Maior que um> - Define o número máximo de membros por clan"
+  cmd_no_perm: "§cVocê não tem acesso ao comando"
+  cmd_desconhecido: "§cComando desconhecido"
+  cmd_lista_formato: "§aArena §6{0} §acom §6{1} §ajogadores."
+  jogador_na_arena: "§aVocê já está em uma arena"
+  jogador_sem_arena: "§cVocê não está em uma arena"
+  jogador_com_itens: "§cVocê não pode entrar com itens"
+  jogador_imortal_acabou: "§aVocê não está mais invulnerável"
+  arena_jogador_entrou: "§aJogador §e{0} §aentrou na arena!"
+  arena_jogador_saiu: "§aJogador §c{0} §asaiu da arena!"
+  arena_nao_existe: "§aArena §e{0} §anão existe!"
+  arena_ja_existe: "§aArena §c{0} §ajá existe!"
+  arena_maximo_clan_member: "§7Há muitos membros de seu clan na arena"
+  arena_comando_bloqueado: "§cVocê não pode usar esse comandos!"
+  arena_teleporte_bloqueado: "§cO teleporte está bloqueado nessa arena!"
+  arena_dropItems_bloqueado: "§cVocê não pode dropar itens nessa arena!"
+  arena_criar: "§aArena §e{0} §acriada com sucesso!"
+  arena_deletar: "§aArena §c{0} §adeletada com sucesso!"
+  arena_setkit: "§aVocê atualizou o kit da arena §e{0}"
+  arena_setpot: "§aVocê atualizou as poções da arena §e{0}"
+  arena_setentrada: "§aVocê atualizou a entrada da arena §e{0}"
+  arena_setsaida: "§aVocê atualizou a saida da arena §e{0}"
+  arena_setclan: "§aVocê atualizou clans para §c{0} §ana arena §e{1}"
+  arena_setmembros: "§aVocê atualizou para §c{0} §ao limite de membros na arena §e{1}"
+  arena_lista_vazia: "§cNem uma arena disponível"
