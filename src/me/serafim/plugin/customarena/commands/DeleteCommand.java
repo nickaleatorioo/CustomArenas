@@ -20,16 +20,18 @@ public class DeleteCommand implements Command {
         if (arguments.length >= 2) {
             String arenaNome = arguments[1].toLowerCase();
             if (plugin.getArenaManager().arenaExists(arenaNome)) {
-                player.sendMessage(FileManager.getMessage("arena_deletar").replace("{0}", arenaNome));
-                plugin.getArenaManager().deleteArena(player, arenaNome);
+                Arena arena = plugin.getArenaManager().getArena(arenaNome);
+                if (arena.getPlayers().isEmpty()) {
+                    plugin.getArenaManager().deleteArena(player, arenaNome);
+                } else {
+                    player.sendMessage(FileManager.getMessage("arena_com_players"));
+                }
             } else {
                 player.sendMessage(FileManager.getMessage("arena_nao_existe").replace("{0}", arenaNome));
             }
         } else {
             player.sendMessage(getDescription());
         }
-
-
     }
 
     @Override

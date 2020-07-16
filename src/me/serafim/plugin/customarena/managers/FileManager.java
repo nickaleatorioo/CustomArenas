@@ -64,9 +64,9 @@ public class FileManager {
         File file = new File("plugins//CustomArenas//Arenas", name + ".yml");
 
         if (file.delete()) {
-            player.sendMessage("Arena deleted");
+            player.sendMessage(FileManager.getMessage("arena_deletar").replace("{0}", name));
         } else {
-            player.sendMessage("Arena not deleted");
+            player.sendMessage("§cErro ao deletar");
         }
     }
 

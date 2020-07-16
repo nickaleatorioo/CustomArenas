@@ -15,12 +15,11 @@ import java.util.Map;
 
 public class CommandManager implements CommandExecutor, TabCompleter {
     private final Map<String, me.serafim.plugin.customarena.Command> commands = new HashMap<>();
+    private final CustomArena plugin = CustomArena.getInstance();
 
     public Map<String, me.serafim.plugin.customarena.Command> getCommands() {
         return commands;
     }
-
-    private final CustomArena plugin = CustomArena.getInstance();
 
     public void registerCommand(String name, me.serafim.plugin.customarena.Command command) {
         this.commands.put(name, command);
@@ -71,6 +70,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
         if (strings.length == 2) {
             switch (strings[0].toLowerCase()) {
+                case "open":
                 case "entrar":
                 case "deletar":
                 case "setentrada":

@@ -44,6 +44,7 @@ public class CustomArena extends JavaPlugin {
         this.arenaManager = new ArenaManager();
         this.fileManager = new FileManager();
         this.commandManager.registerCommand("default", new DefaultCommand());
+        this.commandManager.registerCommand("open", new OpenCloseCommand());
         this.commandManager.registerCommand("entrar", new JoinCommand());
         this.commandManager.registerCommand("sair", new ExitCommand());
         this.commandManager.registerCommand("lista", new ListCommand());

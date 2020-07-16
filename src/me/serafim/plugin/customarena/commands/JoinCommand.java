@@ -24,23 +24,28 @@ public class JoinCommand implements Command {
                 player.sendMessage(FileManager.getMessage("jogador_na_arena"));
             } else {
                 if (plugin.getArenaManager().arenaExists(arenaNome)) {
-                    if (!inventoryEmpty(player.getInventory().getContents())) {
-                        player.sendMessage(FileManager.getMessage("jogador_com_itens"));
-                    } else if (!inventoryEmpty(player.getInventory().getArmorContents())) {
-                        player.sendMessage(FileManager.getMessage("jogador_com_itens"));
-                    } else {
-                        Arena arena = plugin.getArenaManager().getArena(arenaNome);
-                        if (arena.isClans()) {
-                            if (plugin.getArenaManager().maxMembersClanInArena(player, arenaNome)) {
-                                player.sendMessage(FileManager.getMessage("arena_maximo_clan_member"));
+                    Arena arena = plugin.getArenaManager().getArena(arenaNome);
+                    if (arena.isOpen()) {
+                        if (!inventoryEmpty(player.getInventory().getContents())) {
+                            player.sendMessage(FileManager.getMessage("jogador_com_itens"));
+                        } else if (!inventoryEmpty(player.getInventory().getArmorContents())) {
+                            player.sendMessage(FileManager.getMessage("jogador_com_itens"));
+                        } else {
+
+                            if (arena.isClans()) {
+                                if (plugin.getArenaManager().maxMembersClanInArena(player, arenaNome)) {
+                                    player.sendMessage(FileManager.getMessage("arena_maximo_clan_member"));
+                                } else {
+                                    player.teleport(arena.getEntry());
+                                    plugin.getArenaManager().addPlayer(player, arenaNome);
+                                }
                             } else {
                                 player.teleport(arena.getEntry());
                                 plugin.getArenaManager().addPlayer(player, arenaNome);
                             }
-                        } else {
-                            player.teleport(arena.getEntry());
-                            plugin.getArenaManager().addPlayer(player, arenaNome);
                         }
+                    } else {
+                        player.sendMessage(FileManager.getMessage("arena_fechada"));
                     }
                 } else {
                     player.sendMessage(FileManager.getMessage("arena_nao_existe").replace("{0}", arenaNome));

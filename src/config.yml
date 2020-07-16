@@ -23,6 +23,7 @@ ComandosPermitidos:
 
 Mensagens:
   prefixo: "§8(§4§lDreamArenas§8) "
+  cmd_open: "§7/arena open <Arena> - Abre/Fecha uma arena"
   cmd_entrar: "§7/arena entrar <Arena> - Entra em uma arena."
   cmd_sair: "§7/arena sair - Sai da arena atual."
   cmd_lista: "§7/arena lista - Mostra todas as arenas disponíveis."
@@ -32,7 +33,7 @@ Mensagens:
   cmd_setpot: "§7/arena setpot <Arena> - Atualiza as poções da arena."
   cmd_setentrada: "§7/arena setentrada <Arena> - Atualiza a entrada da arena."
   cmd_setsaida: "§7/arena setsair <Arena> - Atualiza a saída da arena."
-  cmd_setclan: "§7/arena setclan <Arena> <true/false> - Define se a arena tem limite de membros por clan"
+  cmd_setclan: "§7/arena setclan <Arena> Ativa/ Desativa clans na arena"
   cmd_setmembros: "§7/arena setmembros <Arena> <Tamanho Maior que um> - Define o número máximo de membros por clan"
   cmd_no_perm: "§cVocê não tem acesso ao comando"
   cmd_desconhecido: "§cComando desconhecido"
@@ -58,3 +59,7 @@ Mensagens:
   arena_setclan: "§aVocê atualizou clans para §c{0} §ana arena §e{1}"
   arena_setmembros: "§aVocê atualizou para §c{0} §ao limite de membros na arena §e{1}"
   arena_lista_vazia: "§cNem uma arena disponível"
+  arena_com_players: "§cVocê deve fechar a arena primeiro"
+  arena_fechada: "§cA arena está fechada."
+  arena_abriu: "§cVocê abriu a arena §a{0}"
+  arena_fechou: "§cVocê fechou a arena §a{0}"
