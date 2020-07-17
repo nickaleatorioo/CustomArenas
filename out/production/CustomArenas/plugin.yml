@@ -1,10 +1,11 @@
 name: CustomArenas
 main: me.serafim.plugin.customarena.CustomArena
-version: 1.0.0
+version: 1.0.1
 description: Esse plugin permite criar várias arenas customizadas
 author: nickaleatorioo
 softdepend:
   - SimpleClans
+  - CombatLog
 commands:
   arena:
     description: Existe mais informações sobre os comandos

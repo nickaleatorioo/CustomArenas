@@ -1,6 +1,7 @@
 package me.serafim.plugin.customarena.listeners;
 
 import me.serafim.plugin.customarena.CustomArena;
+import net.sacredlabyrinth.phaed.simpleclans.SimpleClans;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

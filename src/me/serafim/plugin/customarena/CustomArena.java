@@ -1,12 +1,19 @@
 package me.serafim.plugin.customarena;
 
+import com.jackproehl.plugins.CombatLog;
 import me.serafim.plugin.customarena.commands.*;
 import me.serafim.plugin.customarena.listeners.*;
 import me.serafim.plugin.customarena.managers.ArenaManager;
 import me.serafim.plugin.customarena.managers.CommandManager;
 import me.serafim.plugin.customarena.managers.ConfigurationManager;
 import me.serafim.plugin.customarena.managers.FileManager;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CustomArena extends JavaPlugin {
     private static CustomArena instance;
@@ -68,10 +75,40 @@ public class CustomArena extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new OnPlayerTeleport(), instance);
         this.getLogger().info(this.getDescription().getName() + " loaded in version " + this.getDescription().getVersion());
         this.getLogger().info("Use SimpleClans: " + getConfigurationManager().isUseSimpleClan());
+        boolean combatLog = getServer().getPluginManager().getPlugin("CombatLog") != null;
+        this.getLogger().info("Use CombatLog: " + combatLog);
         this.getLogger().info("Arenas Carregadas: " + getArenaManager().getArenas().size());
     }
 
     @Override
     public void onDisable() {
+
+        Collection<Arena> arenas = this.getArenaManager().getArenas().values();
+        Map<Player, Location> playerLocationMap = new HashMap<>();
+
+        for (Arena arena : arenas) {
+            for (Player player : arena.getPlayers()) {
+                playerLocationMap.put(player, arena.getExit());
+            }
+        }
+
+        boolean b = true;
+
+        if ((this.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
+            b = CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled;
+            CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = false;
+        }
+
+        for (Map.Entry<Player, Location> player : playerLocationMap.entrySet()) {
+            this.getArenaManager().limparJogador(player.getKey());
+            player.getKey().teleport(player.getValue().add(0, 2, 0));
+            this.getLogger().info("Jogador \"" + player.getKey().getName() + "\" foi forçado a sair da arena");
+        }
+
+        if ((this.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
+            CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = b;
+        }
+
+        this.getArenaManager().getArenas().clear();
     }
 }

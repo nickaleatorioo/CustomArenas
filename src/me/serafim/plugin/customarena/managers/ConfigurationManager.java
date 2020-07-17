@@ -1,7 +1,6 @@
 package me.serafim.plugin.customarena.managers;
 
 import me.serafim.plugin.customarena.CustomArena;
-import org.bukkit.Location;
 
 import java.util.List;
 

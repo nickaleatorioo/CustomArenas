@@ -6,6 +6,9 @@ import me.serafim.plugin.customarena.CustomArena;
 import me.serafim.plugin.customarena.managers.FileManager;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OpenCloseCommand implements Command {
     @Override
     public String getPermission() {
@@ -22,6 +25,15 @@ public class OpenCloseCommand implements Command {
                 Arena arena = plugin.getArenaManager().getArena(arenaNome);
                 if (arena.isOpen()) {
                     player.sendMessage(FileManager.getMessage("arena_fechou").replace("{0}", arenaNome));
+
+                    List<Player> players = new ArrayList<>(arena.getPlayers());
+
+                    for (Player jogador : players) {
+                        plugin.getArenaManager().limparJogador(jogador);
+                        plugin.getArenaManager().removePlayer(jogador);
+                        jogador.sendMessage(FileManager.getMessage("arena_fechada"));
+                    }
+
                     arena.setOpen(false);
                 } else {
                     player.sendMessage(FileManager.getMessage("arena_abriu").replace("{0}", arenaNome));

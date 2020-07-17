@@ -32,7 +32,7 @@ Mensagens:
   cmd_setkit: "§7/arena setkit <Arena> - Atualiza o kit da arena."
   cmd_setpot: "§7/arena setpot <Arena> - Atualiza as poções da arena."
   cmd_setentrada: "§7/arena setentrada <Arena> - Atualiza a entrada da arena."
-  cmd_setsaida: "§7/arena setsair <Arena> - Atualiza a saída da arena."
+  cmd_setsaida: "§7/arena setsaida <Arena> - Atualiza a saída da arena."
   cmd_setclan: "§7/arena setclan <Arena> Ativa/ Desativa clans na arena"
   cmd_setmembros: "§7/arena setmembros <Arena> <Tamanho Maior que um> - Define o número máximo de membros por clan"
   cmd_no_perm: "§cVocê não tem acesso ao comando"

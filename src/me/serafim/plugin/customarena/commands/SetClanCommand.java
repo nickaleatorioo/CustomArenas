@@ -20,10 +20,9 @@ public class SetClanCommand implements Command {
             String arenaNome = arguments[1].toLowerCase();
 
             if (plugin.getArenaManager().arenaExists(arenaNome)) {
-                player.sendMessage(FileManager.getMessage("arena_setclan").replace("{0}", arguments[2]).replace("{1}", arenaNome));
                 Arena arena = plugin.getArenaManager().getArena(arenaNome);
                 arena.setClans(!arena.isClans());
-                player.sendMessage(FileManager.getMessage("cmd_setclan").replace("{0}", String.valueOf(arena.isClans())).replace("{1}", arenaNome));
+                player.sendMessage(FileManager.getMessage("arena_setclan").replace("{0}", String.valueOf(arena.isClans())).replace("{1}", arenaNome));
                 plugin.getFileManager().saveArena(arena);
             } else {
                 player.sendMessage(FileManager.getMessage("arena_nao_existe").replace("{0}", arenaNome));

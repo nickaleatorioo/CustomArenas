@@ -1,5 +1,6 @@
 package me.serafim.plugin.customarena.managers;
 
+import com.jackproehl.plugins.CombatLog;
 import me.serafim.plugin.customarena.Arena;
 import me.serafim.plugin.customarena.CustomArena;
 import net.sacredlabyrinth.phaed.simpleclans.Clan;
@@ -13,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ArenaManager {
-    private final SimpleClans simpleClans = SimpleClans.getInstance();
     private final CustomArena plugin = CustomArena.getInstance();
     private final Map<String, Arena> arenas = new HashMap<>();
     private final Map<Player, String> players = new HashMap<>();
@@ -61,8 +61,13 @@ public class ArenaManager {
             return false;
         }
 
+
+        if (SimpleClans.getInstance().getClanManager().getClanPlayer(player) == null) {
+            return false;
+        }
+
         Arena arena = this.getArena(arenaNome);
-        Clan clan = this.simpleClans.getClanManager().getClanPlayer(player).getClan();
+        Clan clan = SimpleClans.getInstance().getClanManager().getClanPlayer(player).getClan();
         int members = 0;
 
         if (clan == null) {
@@ -97,10 +102,13 @@ public class ArenaManager {
         Arena arena = this.getArena(arenaNome);
 
         if (this.plugin.getConfigurationManager().isUseSimpleClan()) {
-            this.simpleClans.getClanManager().getClanPlayer(player).setFriendlyFire(!arena.isClans());
+            if (SimpleClans.getInstance().getClanManager().getClanPlayer(player) != null) {
+                SimpleClans.getInstance().getClanManager().getClanPlayer(player).setFriendlyFire(!arena.isClans());
+            }
         }
 
         arena.addPlayer(player);
+        player.getActivePotionEffects().forEach(potionEffect -> player.removePotionEffect(potionEffect.getType()));
         arena.broadcast(FileManager.getMessage("arena_jogador_entrou").replace("{0}", player.getName()));
         player.getInventory().setContents(arena.getInventoryContents());
         player.getInventory().setArmorContents(arena.getArmorContents());
@@ -121,18 +129,36 @@ public class ArenaManager {
         this.playersGod.remove(player);
 
         if (this.plugin.getConfigurationManager().isUseSimpleClan()) {
-            this.simpleClans.getClanManager().getClanPlayer(player).setFriendlyFire(false);
+            if (SimpleClans.getInstance().getClanManager().getClanPlayer(player) != null) {
+                SimpleClans.getInstance().getClanManager().getClanPlayer(player).setFriendlyFire(false);
+            }
         }
 
         arena.removePlayer(player);
         arena.broadcast(FileManager.getMessage("arena_jogador_saiu").replace("{0}", player.getName()));
+        limparJogador(player);
+
+        boolean b = true;
+
+        if ((plugin.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
+            b = CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled;
+            CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = false;
+        }
+
+        player.teleport(arena.getExit());
+
+        if ((plugin.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
+            CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = b;
+        }
+    }
+
+    public void limparJogador(Player player) {
         player.getActivePotionEffects().forEach(potionEffect -> player.removePotionEffect(potionEffect.getType()));
         player.getInventory().clear();
         player.getInventory().setHelmet(null);
         player.getInventory().setChestplate(null);
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
-        player.teleport(arena.getExit());
     }
 
     public void removePlayerGod(Player player) {
