@@ -14,7 +14,7 @@ public class OnPlayerDeath implements Listener {
         Player player = event.getEntity();
 
         if (plugin.getArenaManager().playerInArena(player)) {
-            plugin.getArenaManager().removePlayer(player);
+            plugin.getArenaManager().removePlayer(player, false);
             if (!plugin.getConfigurationManager().isDropItemOnDead()) {
                 event.getDrops().clear();
                 event.setDroppedExp(0);

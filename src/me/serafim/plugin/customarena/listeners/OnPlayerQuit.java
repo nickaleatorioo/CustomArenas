@@ -1,5 +1,6 @@
 package me.serafim.plugin.customarena.listeners;
 
+import com.jackproehl.plugins.CombatLog;
 import me.serafim.plugin.customarena.CustomArena;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +15,13 @@ public class OnPlayerQuit implements Listener {
         Player player = event.getPlayer();
 
         if (plugin.getArenaManager().playerInArena(player)) {
-            plugin.getArenaManager().removePlayer(player);
+            boolean combat = false;
+
+            if ((plugin.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
+                combat = CombatLog.getPlugin(CombatLog.class).taggedPlayers.containsKey(player.getName());
+            }
+
+            plugin.getArenaManager().removePlayer(player, !combat);
         }
     }
 }

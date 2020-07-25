@@ -42,7 +42,7 @@ public class ArenaManager {
         List<Player> players = arena.getPlayers();
 
         for (Player player1 : players) {
-            this.removePlayer(player1);
+            this.removePlayer(player1, true);
         }
 
         this.arenas.remove(name);
@@ -123,7 +123,7 @@ public class ArenaManager {
         }.runTaskLater(plugin, plugin.getConfigurationManager().getImmortalTime() * 20);
     }
 
-    public void removePlayer(Player player) {
+    public void removePlayer(Player player, boolean teleport) {
         Arena arena = this.getArenaByPlayer(player);
         this.players.remove(player);
         this.playersGod.remove(player);
@@ -140,15 +140,17 @@ public class ArenaManager {
 
         boolean b = true;
 
-        if ((plugin.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
-            b = CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled;
-            CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = false;
-        }
+        if (teleport) {
+            if ((plugin.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
+                b = CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled;
+                CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = false;
+            }
 
-        player.teleport(arena.getExit());
+            player.teleport(arena.getExit());
 
-        if ((plugin.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
-            CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = b;
+            if ((plugin.getServer().getPluginManager().getPlugin("CombatLog") != null)) {
+                CombatLog.getPlugin(CombatLog.class).blockTeleportationEnabled = b;
+            }
         }
     }
 

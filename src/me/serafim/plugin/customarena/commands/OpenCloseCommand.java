@@ -30,7 +30,7 @@ public class OpenCloseCommand implements Command {
 
                     for (Player jogador : players) {
                         plugin.getArenaManager().limparJogador(jogador);
-                        plugin.getArenaManager().removePlayer(jogador);
+                        plugin.getArenaManager().removePlayer(jogador,true);
                         jogador.sendMessage(FileManager.getMessage("arena_fechada"));
                     }
 

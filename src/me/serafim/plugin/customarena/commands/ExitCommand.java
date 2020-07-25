@@ -16,7 +16,7 @@ public class ExitCommand implements Command {
         CustomArena plugin = CustomArena.getInstance();
 
         if (plugin.getArenaManager().playerInArena(player)) {
-            plugin.getArenaManager().removePlayer(player);
+            plugin.getArenaManager().removePlayer(player,true);
         } else {
             player.sendMessage(FileManager.getMessage("jogador_sem_arena"));
         }
